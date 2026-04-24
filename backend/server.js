@@ -23,6 +23,8 @@ const httpServer = createServer(app);
 const allowedOrigins = [
   process.env.CLIENT_URL || 'http://localhost:5173',
   'https://dating-app-kappa-six.vercel.app',
+  'https://dating-app-cyan-rho.vercel.app',
+  /\.vercel\.app$/,
 ];
 
 const io = new Server(httpServer, {

@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@layer base {
+  * { box-sizing: border-box; }
+  body {
+    background-color: #030712;
+    color: #fff;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Fix select dropdown option text visibility across all browsers */
+select option {
+  background-color: #1f2937;
+  color: #ffffff;
+}
+select {
+  color-scheme: dark;
+}
+
+/* Scrollbar hide */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Range slider */
+input[type='range'].range-thumb {
+  pointer-events: none;
+  -webkit-appearance: none;
+  background: transparent;
+}
+input[type='range'].range-thumb::-webkit-slider-thumb {
+  pointer-events: all;
+  -webkit-appearance: none;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f43f5e, #a855f7);
+  border: 2px solid white;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(244,63,94,0.5);
+}
+input[type='range'].range-thumb::-moz-range-thumb {
+  pointer-events: all;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f43f5e, #a855f7);
+  border: 2px solid white;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(244,63,94,0.5);
+}
+input[type='range'].range-thumb::-webkit-slider-runnable-track {
+  background: transparent;
+  height: 6px;
+}

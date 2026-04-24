@@ -8,8 +8,10 @@ import { calculateProfileScore } from '../utils/matchingEngine.js';
 const router = express.Router();
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
+const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_change_in_production_123!';
+
 const signToken = (id) =>
-  jwt.sign({ id }, process.env.JWT_SECRET, {
+  jwt.sign({ id }, JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN || '30d'
   });
 

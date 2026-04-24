@@ -24,13 +24,19 @@ function SessionLoader({ children }) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (token && !user) {
-      // Restore full user from DB using stored token
-      fetchMe().finally(() => setReady(true));
-    } else {
+    const init = async () => {
+      if (token && !user) {
+        try {
+          await fetchMe();
+        } catch {
+          // token invalid, clear it
+          localStorage.removeItem('token');
+        }
+      }
       setReady(true);
-    }
-    if (token) initSocket(token);
+      if (token) initSocket(token);
+    };
+    init();
   }, [token]);
 
   if (!ready) {

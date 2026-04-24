@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Component } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { useAuthStore } from './store/useAuthStore';
@@ -16,6 +16,21 @@ import ProfilePage    from './pages/ProfilePage';
 import NotificationsPage from './pages/NotificationsPage';
 import InsightsPage   from './pages/InsightsPage';
 import Layout         from './components/Layout';
+
+class ErrorBoundary extends Component {
+  state = { crashed: false };
+  componentDidCatch() {
+    localStorage.removeItem('token');
+    this.setState({ crashed: true });
+  }
+  render() {
+    if (this.state.crashed) {
+      window.location.href = '/';
+      return null;
+    }
+    return this.props.children;
+  }
+}
 
 // Shows a spinner while we restore the session from the token
 function SessionLoader({ children }) {
@@ -70,6 +85,7 @@ function OnboardingRoute({ children }) {
 
 export default function App() {
   return (
+    <ErrorBoundary>
     <BrowserRouter>
       <Toaster
         position="top-center"
@@ -98,5 +114,6 @@ export default function App() {
         </Routes>
       </SessionLoader>
     </BrowserRouter>
+    </ErrorBoundary>
   );
 }

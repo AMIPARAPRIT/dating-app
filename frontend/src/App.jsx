@@ -29,15 +29,17 @@ function SessionLoader({ children }) {
         try {
           await fetchMe();
         } catch {
-          // token invalid, clear it
           localStorage.removeItem('token');
         }
       }
       setReady(true);
-      if (token) initSocket(token);
     };
     init();
   }, [token]);
+
+  useEffect(() => {
+    if (ready && token) initSocket(token);
+  }, [ready, token]);
 
   if (!ready) {
     return (

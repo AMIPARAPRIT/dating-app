@@ -29,10 +29,11 @@ export const useChatStore = create((set, get) => ({
 
     socket = io(import.meta.env.VITE_API_URL || 'https://dating-app-tj63.onrender.com', {
       auth: { token },
-      transports: ['websocket'],
+      transports: ['polling', 'websocket'],
       reconnection: true,
-      reconnectionAttempts: 5,
-      reconnectionDelay: 1000,
+      reconnectionAttempts: 3,
+      reconnectionDelay: 2000,
+      timeout: 10000,
     });
 
     socket.on('connect', () => {

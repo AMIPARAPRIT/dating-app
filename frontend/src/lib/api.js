@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const BACKEND_URL = import.meta.env.VITE_API_URL || 'https://dating-app-tj63.onrender.com';
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : '/api'
+  baseURL: `${BACKEND_URL}/api`
 });
 
 api.interceptors.request.use((config) => {

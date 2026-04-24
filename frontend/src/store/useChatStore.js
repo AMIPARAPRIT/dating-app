@@ -27,7 +27,7 @@ export const useChatStore = create((set, get) => ({
   initSocket: (token) => {
     if (socket?.connected) return;
 
-    socket = io(import.meta.env.VITE_API_URL || '/', {
+    socket = io(import.meta.env.VITE_API_URL || 'https://dating-app-tj63.onrender.com', {
       auth: { token },
       transports: ['websocket'],
       reconnection: true,
